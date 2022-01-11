@@ -5,7 +5,8 @@ FROM rancher/k3s:${K3S_VERSION} AS k3s
 FROM alpine
 COPY --from=k3s / /
 RUN apk add --no-cache bash
-## This is as per-the parent image
+
+# This is as per-the parent image
 RUN chmod 1777 /tmp
 VOLUME /var/lib/kubelet
 VOLUME /var/lib/rancher/k3s
