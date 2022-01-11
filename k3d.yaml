@@ -53,6 +53,6 @@ options:
         nodeFilters:
           - agent:1
   kubeconfig:
-    updateDefaultKubeconfig: false
-    switchCurrentContext: false
+    updateDefaultKubeconfig: true
+    switchCurrentContext: true
   runtime: {}
