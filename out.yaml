@@ -7203,7 +7203,6 @@ spec:
           privileged: true
         volumeMounts:
         - mountPath: /mnt/workingarea
-          mountPropagation: Bidirectional
           name: working-area
         - mountPath: /config
           name: config
@@ -7212,11 +7211,9 @@ spec:
         - mountPath: /mnt/node0
           name: node-fs0
         - mountPath: /mnt/mounts
-          mountPropagation: HostToContainer
           name: node-mounts
           readOnly: true
         - mountPath: /mnt/node-cgroups
-          mountPropagation: HostToContainer
           name: node-cgroups
         - mountPath: /mnt/hosts
           name: node-hosts
