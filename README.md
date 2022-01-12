@@ -46,5 +46,5 @@ stands. If making contributions, please add something to this file.
 4. Build the k3s Docker image by running - `docker build -t k3s .`
 5. Edit the `certificate.yaml` file, specifically the domains in the `dnsNames` section.
 6. Update the `domain:` in config.yaml.
-7. Open `out.yaml` and replace all instances of `jimmyb.ninja` with your domain.
+7. Open `out.yaml` and replace all instances of `simonemms.com` with your domain.
 8. Run `./run.sh`. It'll take a few moments to deploy the new Kubernetes cluster.
