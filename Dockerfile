@@ -1,13 +1,13 @@
-# @link https://github.com/k3s-io/k3s/blob/master/package/Dockerfile
-ARG K3S_VERSION=v1.21.7-k3s1
+ARG K3S_VERSION=v1.22.6-k3s1
 FROM rancher/k3s:${K3S_VERSION} AS k3s
+RUN rm /bin/sh
 
-FROM alpine
-COPY --from=k3s / /
-RUN apk add --no-cache bash
-
-# This is as per-the parent image
-RUN chmod 1777 /tmp
+FROM ubuntu:20.04
+COPY --from=k3s /bin /bin
+RUN mkdir -p /etc \
+  && echo 'hosts: files dns' > /etc/nsswitch.conf \
+  && chmod 1777 /tmp \
+  && mkdir -p /var/lib/rancher/k3s/agent/etc/containerd/
 VOLUME /var/lib/kubelet
 VOLUME /var/lib/rancher/k3s
 VOLUME /var/lib/cni
