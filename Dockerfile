@@ -3,11 +3,14 @@ FROM rancher/k3s:${K3S_VERSION} AS k3s
 RUN rm /bin/sh
 
 FROM ubuntu:20.04
-COPY --from=k3s /bin /bin
-RUN mkdir -p /etc \
+RUN apt-get update \
+  && apt-get install -y ca-certificates \
+  && mkdir -p /etc \
   && echo 'hosts: files dns' > /etc/nsswitch.conf \
   && chmod 1777 /tmp \
   && mkdir -p /var/lib/rancher/k3s/agent/etc/containerd/
+# Must come after the RUN step
+COPY --from=k3s /bin /bin
 VOLUME /var/lib/kubelet
 VOLUME /var/lib/rancher/k3s
 VOLUME /var/lib/cni

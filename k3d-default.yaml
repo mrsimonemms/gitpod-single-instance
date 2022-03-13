@@ -1,0 +1,54 @@
+---
+apiVersion: k3d.io/v1alpha4
+kind: Simple
+metadata:
+  name: gitpod
+servers: 1
+agents: 2
+image: k3s
+volumes:
+  - volume: /usr/src:/usr/src
+    nodeFilters:
+      - agent:1
+  - volume: /etc/hosts:/etc/hosts
+    nodeFilters:
+      - agent:1
+#  - volume: /sys/fs/cgroup:/sys/fs/cgroup
+#    nodeFilters:
+#      - agent:1
+  - volume: /tmp/gitpod:/var/gitpod/workspaces:shared
+    nodeFilters:
+      - agent:1
+#  - volume: /proc/60:/proc/60:shared
+#    nodeFilters:
+#      - agent:1
+options:
+  k3d:
+    wait: true
+    disableLoadbalancer: true
+    disableRollback: true
+  k3s:
+    extraArgs:
+      - arg: --no-deploy=traefik
+        nodeFilters:
+          - server:*
+    nodeLabels:
+      - label: gitpod.io/workload_meta=true
+        nodeFilters:
+          - agent:0
+      - label: gitpod.io/workload_ide=true
+        nodeFilters:
+          - agent:0
+      - label: gitpod.io/workload_workspace_services=true
+        nodeFilters:
+          - agent:1
+      - label: gitpod.io/workload_workspace_regular=true
+        nodeFilters:
+          - agent:1
+      - label: gitpod.io/workload_workspace_headless=true
+        nodeFilters:
+          - agent:1
+  kubeconfig:
+    updateDefaultKubeconfig: true
+    switchCurrentContext: true
+  runtime: {}

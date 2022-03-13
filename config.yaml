@@ -8,13 +8,10 @@ certificate:
   name: https-certificates
 containerRegistry:
   inCluster: true
-  s3storage: null
 database:
   inCluster: true
-domain: gitpod-k3s.simonemms.com
-imagePullSecrets: null
-jaegerOperator:
-  inCluster: true
+disableDefinitelyGp: false
+domain: gitpod-kind.simonemms.com
 kind: Full
 metadata:
   region: local
@@ -22,6 +19,8 @@ objectStorage:
   inCluster: true
 observability:
   logLevel: info
+openVSX:
+  url: https://open-vsx.org
 repository: eu.gcr.io/gitpod-core-dev/build
 workspace:
   resources:
