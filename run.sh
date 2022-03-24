@@ -84,7 +84,7 @@ echo "Building image"
 touch /tmp/etc-hosts
 
 echo "Provision K3d"
-k3d cluster create --config k3d.yaml
+k3d cluster create --config https://raw.githubusercontent.com/MrSimonEmms/gitpod-single-instance/develop/k3d.yaml
 
 export KUBECONFIG="$(k3d kubeconfig write gitpod || true)"
 
@@ -103,7 +103,7 @@ helm upgrade \
     cert-manager
 
 echo "Create certificates..."
-kubectl apply -f ./certificate.yaml
+kubectl apply -f https://raw.githubusercontent.com/MrSimonEmms/gitpod-single-instance/develop/certificate.yaml
 
 CONFIG_FILE="${DIR}/gitpod-config.yaml"
 
@@ -117,6 +117,6 @@ CONFIG_FILE="${DIR}/gitpod-config.yaml"
 # @todo(sje) remove mountPropagation == HostToContainer options
 #installer render --config="${CONFIG_FILE}" --no-validation > gitpod.yaml
 
-kubectl apply -f gitpod.yaml
+kubectl apply -f https://raw.githubusercontent.com/MrSimonEmms/gitpod-single-instance/develop/gitpod.yaml
 
 success
