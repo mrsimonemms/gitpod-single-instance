@@ -108,13 +108,13 @@ kubectl apply -f ./certificate.yaml
 
 CONFIG_FILE="${DIR}/gitpod-config.yaml"
 
-installer init > "${CONFIG_FILE}"
-
-yq e -i '.domain = "localhost"' "${CONFIG_FILE}"
-yq e -i '.workspace.runtime.containerdRuntimeDir = "/run/k3s/containerd/io.containerd.runtime.v2.task/k8s.io"' "${CONFIG_FILE}"
-yq e -i '.workspace.runtime.containerdSocket = "/run/k3s/containerd/containerd.sock"' "${CONFIG_FILE}"
-
 # @todo(sje) generate from installer
+#installer init > "${CONFIG_FILE}"
+#
+#yq e -i '.domain = "localhost"' "${CONFIG_FILE}"
+#yq e -i '.workspace.runtime.containerdRuntimeDir = "/run/k3s/containerd/io.containerd.runtime.v2.task/k8s.io"' "${CONFIG_FILE}"
+#yq e -i '.workspace.runtime.containerdSocket = "/run/k3s/containerd/containerd.sock"' "${CONFIG_FILE}"
+
 # @todo(sje) remove mountPropagation == HostToContainer options
 #installer render --config="${CONFIG_FILE}" --no-validation > gitpod.yaml
 
