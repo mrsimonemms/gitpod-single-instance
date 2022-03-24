@@ -80,7 +80,6 @@ echo "Provisioning k3d cluster"
 k3d cluster delete gitpod
 
 echo "Building image"
-docker build -t k3s .
 
 touch /tmp/etc-hosts
 

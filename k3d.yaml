@@ -5,7 +5,7 @@ metadata:
   name: gitpod
 servers: 1
 agents: 2
-image: k3s
+image: docker pull ghcr.io/mrsimonemms/gitpod-single-instance:latest
 ports:
   - port: 80:80
     nodeFilters:
