@@ -84,7 +84,8 @@ echo "Building image"
 touch /tmp/etc-hosts
 
 echo "Provision K3d"
-k3d cluster create --config https://raw.githubusercontent.com/MrSimonEmms/gitpod-single-instance/develop/k3d.yaml
+wget https://raw.githubusercontent.com/MrSimonEmms/gitpod-single-instance/develop/k3d.yaml
+k3d cluster create --config k3d.yaml
 
 export KUBECONFIG="$(k3d kubeconfig write gitpod || true)"
 
