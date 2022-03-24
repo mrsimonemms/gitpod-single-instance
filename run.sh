@@ -103,9 +103,6 @@ helm upgrade \
     cert-manager \
     cert-manager
 
-echo "Create certificates..."
-kubectl apply -f https://raw.githubusercontent.com/MrSimonEmms/gitpod-single-instance/develop/certificate.yaml
-
 CONFIG_FILE="${DIR}/gitpod-config.yaml"
 
 # @todo(sje) generate from installer
@@ -119,5 +116,8 @@ CONFIG_FILE="${DIR}/gitpod-config.yaml"
 #installer render --config="${CONFIG_FILE}" --no-validation > gitpod.yaml
 
 kubectl apply -f https://raw.githubusercontent.com/MrSimonEmms/gitpod-single-instance/develop/gitpod.yaml
+
+echo "Create certificates..."
+kubectl apply -f https://raw.githubusercontent.com/MrSimonEmms/gitpod-single-instance/develop/certificate.yaml
 
 success
