@@ -6,6 +6,34 @@ DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
 
 INSTALLER_VERSION=release-2022.02.0.1
 
+color() {
+  echo "\e[$1m$2\e[0m"
+}
+
+success() {
+  local logoColor=33
+  local codeColor=34
+  local textColor="1;37"
+
+  local msg="\n"
+  msg="$msg$(color $logoColor "    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")\n"
+  msg="$msg$(color $logoColor "    @@@@@@@@@@@@@@@(,&@@@@@@@@@@@@@@")\n"
+  msg="$msg$(color $logoColor "    @@@@@@@@@@@,,,,,,,,,@@@@@@@@@@@@")$(color $textColor "    Welcome to Gitpod")\n"
+  msg="$msg$(color $logoColor "    @@@@@@(,,,,,,,,,,,,@@@@@@@@@@@@@")\n"
+  msg="$msg$(color $logoColor "    @@@*****,,,,,,,@@@@@@@@@@@/#@@@@")$(color $textColor "    In a few minutes, your installation will be complete. In the meantime,")\n"
+  msg="$msg$(color $logoColor "    @@********/@@@@@@@@@@,,,,,,,,,,@")$(color $textColor "    have a look through our documentation https://www.gitpod.io/docs")\n"
+  msg="$msg$(color $logoColor "    @%******@@@@@@@@%,,,,,,,,,,,,,,@")\n"
+  msg="$msg$(color $logoColor "    @%******@@@@@/******,,,,,,,,,,,@")$(color $textColor "    Your installation will be at: https://localhost}")\n"
+  msg="$msg$(color $logoColor "    @%******@@@@@********@@@@,,,,,,@")\n"
+  msg="$msg$(color $logoColor "    @%******@@@@@@@@@@@@@@@@@***,,,@")$(color $textColor "    Run ")$( color $codeColor "kubectl get pods")\n"
+  msg="$msg$(color $logoColor "    @@********#@@@@@@@@@@@/********@")$(color $textColor "    to check the status of your installation.")\n"
+  msg="$msg$(color $logoColor "    @@@@@@/*******************(@@@@@")\n"
+  msg="$msg$(color $logoColor "    @@@@@@@@@@&***********@@@@@@@@@@")\n"
+  msg="$msg$(color $logoColor "    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")\n"
+
+  echo -e "$msg"
+}
+
 function installer() {
   docker run -it --rm \
     -v="${HOME}/.kube:${HOME}/.kube" \
@@ -80,3 +108,5 @@ yq e -i '.workspace.runtime.containerdSocket = "/run/k3s/containerd/containerd.s
 #installer render --config="${CONFIG_FILE}" --no-validation > gitpod.yaml
 
 kubectl apply -f gitpod.yaml
+
+success
