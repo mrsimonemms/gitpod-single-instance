@@ -34,7 +34,7 @@ success() {
   msg="$msg$(color $logoColor "    @@@*****,,,,,,,@@@@@@@@@@@/#@@@@")$(color $textColor "    In a few minutes, your installation will be complete. In the meantime,")\n"
   msg="$msg$(color $logoColor "    @@********/@@@@@@@@@@,,,,,,,,,,@")$(color $textColor "    have a look through our documentation https://www.gitpod.io/docs")\n"
   msg="$msg$(color $logoColor "    @%******@@@@@@@@%,,,,,,,,,,,,,,@")\n"
-  msg="$msg$(color $logoColor "    @%******@@@@@/******,,,,,,,,,,,@")$(color $textColor "    Your installation will be at: https://localhost}")\n"
+  msg="$msg$(color $logoColor "    @%******@@@@@/******,,,,,,,,,,,@")$(color $textColor "    Your installation will be at: https://localhost")\n"
   msg="$msg$(color $logoColor "    @%******@@@@@********@@@@,,,,,,@")\n"
   msg="$msg$(color $logoColor "    @%******@@@@@@@@@@@@@@@@@***,,,@")$(color $textColor "    Run ")$( color $codeColor "kubectl get pods")\n"
   msg="$msg$(color $logoColor "    @@********#@@@@@@@@@@@/********@")$(color $textColor "    to check the status of your installation.")\n"
