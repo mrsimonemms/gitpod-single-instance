@@ -2,6 +2,8 @@
 
 # Team Quickpod
 #
+#     curl https://raw.githubusercontent.com/MrSimonEmms/gitpod-single-instance/develop/run.sh | bash
+#
 # This was done on the Gitpod 2022 off-site hackathon in Ericeira, Portugal by
 # Lucas Valtl, Simon Emms and Jurgen Leschner.
 #
@@ -44,7 +46,7 @@ success() {
 }
 
 function installer() {
-  docker run -it --rm \
+  docker run --rm \
     -v="${HOME}/.kube:${HOME}/.kube" \
     -v="${PWD}:${PWD}" \
     -w="${PWD}" \
