@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Team Quickpod
+#
+# This was done on the Gitpod 2022 off-site hackathon in Ericeira, Portugal by
+# Lucas Valtl, Simon Emms and Jurgen Leschner.
+#
+# With special thanks to our awesome community member and Gitpod Hero, Jimmy B
+#
+# QUICKPOD FOR THE WIN!!!
+
 set -euo pipefail
 
 DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
@@ -74,7 +83,7 @@ docker build -t k3s .
 touch /tmp/etc-hosts
 
 echo "Provision K3d"
-k3d cluster create --config k3d-default.yaml
+k3d cluster create --config k3d.yaml
 
 export KUBECONFIG="$(k3d kubeconfig write gitpod || true)"
 
