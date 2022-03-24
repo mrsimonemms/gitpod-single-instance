@@ -1,35 +1,32 @@
+---
+apiVersion: k3d.io/v1alpha4
 kind: Simple
-apiVersion: k3d.io/v1alpha3
-name: gitpod
+metadata:
+  name: gitpod
+servers: 1
 agents: 2
 image: k3s
-#ports:
-#  - port: 8080:80
-#    nodeFilters:
-#      - loadbalancer
-#  - port: 8443:443
-#    nodeFilters:
-#      - loadbalancer
-#  - port: 9500:9500
-#    nodeFilters:
-#      - loadbalancer
+ports:
+  - port: 80:80
+    nodeFilters:
+      - loadbalancer
+  - port: 443:443
+    nodeFilters:
+      - loadbalancer
 volumes:
   - volume: /usr/src:/usr/src
     nodeFilters:
       - agent:1
-  - volume: /etc/hosts:/etc/hosts
+  - volume: /tmp/etc-hosts:/etc/hosts:shared
     nodeFilters:
-      - agent:1
-  - volume: /sys/fs/cgroup:/sys/fs/cgroup
-    nodeFilters:
-      - agent:1
+      - agent:*
   - volume: /tmp/gitpod:/var/gitpod/workspaces:shared
     nodeFilters:
       - agent:1
 options:
   k3d:
     wait: true
-    disableLoadbalancer: true
+    disableLoadbalancer: false
     disableRollback: true
   k3s:
     extraArgs:

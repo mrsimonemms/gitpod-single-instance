@@ -11,14 +11,14 @@ containerRegistry:
 database:
   inCluster: true
 disableDefinitelyGp: false
-domain: gitpod-kind.simonemms.com
+domain: localhost
 kind: Full
 metadata:
   region: local
 objectStorage:
   inCluster: true
 observability:
-  logLevel: info
+  logLevel: debug
 openVSX:
   url: https://open-vsx.org
 repository: eu.gcr.io/gitpod-core-dev/build

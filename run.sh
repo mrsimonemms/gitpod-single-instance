@@ -1,12 +1,49 @@
 #!/bin/bash
 
-set -e
+set -euo pipefail
 
-echo "Installing Gitpod for K3d"
+DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
+
+INSTALLER_VERSION=release-2022.02.0.1
+
+function installer() {
+  docker run -it --rm \
+    -v="${HOME}/.kube:${HOME}/.kube" \
+    -v="${PWD}:${PWD}" \
+    -w="${PWD}" \
+    "eu.gcr.io/gitpod-core-dev/build/installer:${INSTALLER_VERSION}" \
+    "${@}"
+}
+
+if ! command -v docker &> /dev/null; then
+  echo "docker could not be found - please visit https://docs.docker.com/get-docker/ for installation instructions"
+  exit 1
+fi
+
+if ! command -v k3d &> /dev/null; then
+  echo "Installing k3d"
+  wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
+fi
+
+if ! command -v kubectl &> /dev/null; then
+  echo "Installing Kubectl"
+  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+  sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+fi
+
+if ! command -v helm &> /dev/null; then
+  echo "Installing Helm"
+  curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+fi
+
+echo "Provisioning k3d cluster"
 
 k3d cluster delete gitpod
 
+echo "Building image"
 docker build -t k3s .
+
+touch /tmp/etc-hosts
 
 echo "Provision K3d"
 k3d cluster create --config k3d-default.yaml
@@ -30,6 +67,16 @@ helm upgrade \
 echo "Create certificates..."
 kubectl apply -f ./certificate.yaml
 
-#kubectl apply -f ./out.yaml
+CONFIG_FILE="${DIR}/gitpod-config.yaml"
 
-gitpod-installer render -c config.yaml | kubectl apply -f -
+installer init > "${CONFIG_FILE}"
+
+yq e -i '.domain = "localhost"' "${CONFIG_FILE}"
+yq e -i '.workspace.runtime.containerdRuntimeDir = "/run/k3s/containerd/io.containerd.runtime.v2.task/k8s.io"' "${CONFIG_FILE}"
+yq e -i '.workspace.runtime.containerdSocket = "/run/k3s/containerd/containerd.sock"' "${CONFIG_FILE}"
+
+# @todo(sje) generate from installer
+# @todo(sje) remove mountPropagation == HostToContainer options
+#installer render --config="${CONFIG_FILE}" --no-validation > gitpod.yaml
+
+kubectl apply -f gitpod.yaml
