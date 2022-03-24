@@ -24,4 +24,4 @@ jobs:
         with:
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}:latest
+            ghcr.io/mrsimonemms/gitpod-single-instance:latest
