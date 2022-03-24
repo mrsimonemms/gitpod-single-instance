@@ -6,7 +6,7 @@ spec:
   secretName: https-certificates
   issuerRef:
     name: ca-issuer
-    kind: ClusterIssuer
+    kind: Issuer
   dnsNames:
     - localhost
     - "*.localhost"
