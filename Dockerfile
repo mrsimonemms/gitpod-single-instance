@@ -4,7 +4,7 @@ RUN rm /bin/sh
 
 FROM ubuntu:20.04
 RUN apt-get update \
-  && apt-get install -y ca-certificates \
+  && apt-get install -y ca-certificates systemctl \
   && mkdir -p /etc \
   && echo 'hosts: files dns' > /etc/nsswitch.conf \
   && chmod 1777 /tmp \
