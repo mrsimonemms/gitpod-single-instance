@@ -45,14 +45,14 @@ success() {
   echo -e "$msg"
 }
 
-function installer() {
-  docker run --rm \
-    -v="${HOME}/.kube:${HOME}/.kube" \
-    -v="${PWD}:${PWD}" \
-    -w="${PWD}" \
-    "eu.gcr.io/gitpod-core-dev/build/installer:${INSTALLER_VERSION}" \
-    "${@}"
-}
+#function installer() {
+#  docker run --rm \
+#    -v="${HOME}/.kube:${HOME}/.kube" \
+#    -v="${PWD}:${PWD}" \
+#    -w="${PWD}" \
+#    "eu.gcr.io/gitpod-core-dev/build/installer:${INSTALLER_VERSION}" \
+#    "${@}"
+#}
 
 if ! command -v docker &> /dev/null; then
   echo "docker could not be found - please visit https://docs.docker.com/get-docker/ for installation instructions"
