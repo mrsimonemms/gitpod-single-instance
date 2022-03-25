@@ -5,6 +5,8 @@ An experimental repository for getting [Gitpod](https://gitpod.io) installed on 
 This may well be renamed, refactored, made into an official Gitpod guide or canned
 in future dependent upon what can be achieved.
 
+[![asciicast](https://asciinema.org/a/vV3Ri83DamHjvTmSR1Xca12ED.svg)](https://asciinema.org/a/vV3Ri83DamHjvTmSR1Xca12ED)
+
 ## Intention
 
 The intention for this repo is to find a way of achieving:
