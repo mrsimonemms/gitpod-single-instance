@@ -1,4 +1,4 @@
-# Gitpod Single-Instance
+# Gitpod Single Instance
 
 An experimental repository for getting [Gitpod](https://gitpod.io) installed on a single-instance
 
