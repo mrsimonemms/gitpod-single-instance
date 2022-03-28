@@ -28,7 +28,7 @@ to support Gitpod, this must be done using a technology that supports full autom
 Ultimately, This will be automated as a "cURL to Bash" type script, eg:
 
 ```shell
-curl -o- https://raw.githubusercontent.com/MrSimonEmms/gitpod-single-instance/tree/main/install.sh | bash
+curl https://raw.githubusercontent.com/MrSimonEmms/gitpod-single-instance/develop/run.sh | bash
 ```
 
 ## Contributions Are Welcome!
