@@ -1,0 +1,6 @@
+.idea
+.DB_Store
+Thumbs.db
+tmp
+.env
+.envrc
