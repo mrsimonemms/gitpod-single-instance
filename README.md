@@ -1,5 +1,10 @@
 # Gitpod Single Instance
 
+> **Archived**
+>
+> This now superseded by the officially-support [Gitpod Preview Install](https://github.com/gitpod-io/gitpod/tree/main/install/preview).
+> Please use that instead
+
 An experimental repository for getting [Gitpod](https://gitpod.io) installed on a single-instance
 
 This may well be renamed, refactored, made into an official Gitpod guide or canned
